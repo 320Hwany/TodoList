@@ -2,6 +2,7 @@ package toyproject.todoCalculator.todo.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import toyproject.todoCalculator.todo.domain.Member;
 import toyproject.todoCalculator.todo.dto.MemberDto;
 import toyproject.todoCalculator.todo.repository.MemberRepository;
@@ -15,18 +16,30 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public void join(Member member) {
-        memberRepository.save(member);
+    @Transactional // 이거 왜 쓰징?
+    public void join(MemberDto memberDto) {
+        memberRepository.save(Member.builder()
+                .name(memberDto.getName())
+                .password(memberDto.getPassword())
+                .build());
     }
 
-    public Member findMember(Long id) {
-        return memberRepository.findById(id).get();
+    @Transactional
+    public Optional<Member> findMember(Long id) {
+        return memberRepository.findById(id);
     }
 
+    @Transactional
+    public Optional<Member> findByName(String name) {
+        return memberRepository.findByName(name);
+    }
+
+    @Transactional
     public List<Member> findAll() {
         return memberRepository.findAll();
     }
 
+    @Transactional
     public boolean login(MemberDto memberDto) {
         Optional<Member> findByName = memberRepository.findByName(memberDto.getName());
         Optional<Member> findByPassword = memberRepository.findByPassword(memberDto.getPassword());
