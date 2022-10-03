@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>로그인 창</h2>
+<form th:action="@{/loginForm}" method="post">
+    <label for="username">아이디</label>
+    <input type="text" name="username" id="username">
+    <label for="password">비밀번호</label>
+    <input type="password" name="password" id="password">
+    <br>
+    <button type="submit">로그인</button>
+</form>
+<span class="login_input_check" th:if="${param.error}" > 입력한 계정을 찾을 수 없습니다. </span>
+</body>
+</html>
