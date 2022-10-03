@@ -1,6 +1,7 @@
 package toyproject.todoCalculator.todo.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import toyproject.todoCalculator.todo.dto.MemberDto;
@@ -30,10 +31,15 @@ public class Controller {
     }
 
     @PostMapping("/signup")  // @Size 적용하려면 @Valid 꼭 있어야 한다.
-    public String joinMember(MemberDto memberDto) {
+    public String joinMember(@Valid MemberDto memberDto, BindingResult bindingResult) {
 
-        memberService.join(memberDto);
-
-        return "redirect:/login";
+        if (bindingResult.hasErrors()) {
+            return "redirect:/signup?error1";
+        }
+        if (memberService.join(memberDto)) {
+            return "redirect:/login";
+        } else {
+            return "redirect:/signup?error2";
+        }
     }
 }

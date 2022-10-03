@@ -21,7 +21,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        log.info("configure1");
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/login", "/signup", "/").permitAll()
@@ -36,15 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/login")
                 .invalidateHttpSession(true);
-
-        log.info("configure2");
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(memberService)
                 .passwordEncoder(new BCryptPasswordEncoder());
-
-        log.info("configure3");
     }
 }

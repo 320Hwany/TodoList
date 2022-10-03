@@ -23,8 +23,10 @@ public class Member implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
     private String auth;
@@ -34,17 +36,14 @@ public class Member implements UserDetails {
         this.username = name;
         this.password = password;
         this.auth = auth;
-        log.info("Member");
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        log.info("getAuthorities2");
         Set<GrantedAuthority> roles = new HashSet<>();
         for (String role : auth.split(",")) {
             roles.add(new SimpleGrantedAuthority(role));
         }
-        log.info("getAuthorities2");
         return roles;
     }
 
