@@ -1,10 +1,10 @@
 package toyproject.todoCalculator.todo.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -15,9 +15,9 @@ import toyproject.todoCalculator.todo.service.MemberService;
 import javax.validation.Valid;
 import java.security.Principal;
 
-@org.springframework.stereotype.Controller
+@Controller // 축약 하는법! 클래스 이름이 Controller 이면 안된다!
 @RequiredArgsConstructor
-public class Controller {
+public class MemberController {
 
     private final MemberService memberService;
 
@@ -54,7 +54,7 @@ public class Controller {
     public String joinMember(@Valid MemberDto memberDto, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "redirect:/signup?error";
+            return "redirect:/signup?error1";
         }
         if (memberService.join(memberDto)) {
             return "redirect:/login";

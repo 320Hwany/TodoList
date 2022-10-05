@@ -8,8 +8,8 @@
 </head>
 <body>
     <h2>What do you need</h2>
-    <a href="/TodoList">Todo List <br></a>
-    <a href="/Calculator">Calculator <br></a>
+    <a th:href="@{/TodoList/{id}(id = ${member.id})}"> Todo List <br></a>
+    <a th:href="@{/Calculator/{id}(id = ${member.id})}">Calculator <br></a>
     <div>회원정보</div>
     <p id : th:text="${member.id}"> <br></p>
     <p username : th:text="${member.username}"><br></p>
