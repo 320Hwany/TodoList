@@ -12,6 +12,7 @@ import toyproject.todoCalculator.todo.dto.MemberDto;
 import toyproject.todoCalculator.todo.repository.MemberRepository;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -42,5 +43,18 @@ public class MemberService implements UserDetailsService {
                 .build());
 
         return true;
+    }
+
+    @Transactional
+    public Member findMemberByName(String username) {
+
+        Member member = memberRepository.findByUsername(username).get();
+        return member;
+    }
+
+    @Transactional
+    public Member findMemberById(Long id) {
+        Member member = memberRepository.findById(id).get();
+        return member;
     }
 }
