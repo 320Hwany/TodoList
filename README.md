@@ -39,6 +39,11 @@ localhost:8080을 로그인 창으로 설정하였다. 그러면 Getmapping("/")
     }
 ```
 
+```
+<form th:action="@{/makeTodo}" th:method="post">
+```
+여기서 th:method='post'를 안썼다... @PostMapping을 해도 저걸 안쓰니 매핑이 안되었다...
+
 ## 앞으로 처리해야할 문제들  
 
 @org.springframework.stereotype.Controller 이거 왜 축약이 안될까... 해결 : 클래스 이름이 Controller 이면 안된다.
