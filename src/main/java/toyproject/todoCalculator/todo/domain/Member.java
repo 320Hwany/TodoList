@@ -13,6 +13,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import static javax.persistence.FetchType.*;
+
 @Getter
 @NoArgsConstructor
 @Entity
@@ -20,6 +22,7 @@ import java.util.Set;
 public class Member implements UserDetails {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
 
     @Column(nullable = false)
@@ -30,11 +33,16 @@ public class Member implements UserDetails {
 
     private String auth;
 
+    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL) // 연관 관계 매핑에서의 문제
+    @JoinColumn(name = "todo_id")
+    private Todo todo;
+
     @Builder
-    public Member(String name, String password, String auth) {
+    public Member(String name, String password, String auth, Todo todo) {
         this.username = name;
         this.password = password;
         this.auth = auth;
+        this.todo = todo;
     }
 
     @Override
