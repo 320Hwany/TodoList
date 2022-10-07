@@ -41,5 +41,6 @@ localhost:8080을 로그인 창으로 설정하였다. 그러면 Getmapping("/")
 
 ## 앞으로 처리해야할 문제들  
 
-@org.springframework.stereotype.Controller 이거 왜 축약이 안될까...  
-회원가입에서 최소 필수 조건 넣기, 비밀번호 DB에 저장할 때 암호화 하기
+@org.springframework.stereotype.Controller 이거 왜 축약이 안될까... 해결 : 클래스 이름이 Controller 이면 안된다.
+회원가입에서 최소 필수 조건 넣기, 비밀번호 DB에 저장할 때 암호화 하기  
+각 회원마다 자신만의 todo List가 있다. 로그인을 할 때 사용자 정보를 받아서 각자의 페이지를 보여주기
