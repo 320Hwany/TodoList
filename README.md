@@ -39,8 +39,14 @@ localhost:8080을 로그인 창으로 설정하였다. 그러면 Getmapping("/")
     }
 ```
 
+* 밑의 코드에서 th:method='post'를 안썼다... @PostMapping을 해도 저걸 안쓰니 매핑이 안되었다...
+```
+<form th:action="@{/makeTodo}" th:method="post">
+```
+
+
 ## 앞으로 처리해야할 문제들  
 
-@org.springframework.stereotype.Controller 이거 왜 축약이 안될까... 해결 : 클래스 이름이 Controller 이면 안된다.
-회원가입에서 최소 필수 조건 넣기, 비밀번호 DB에 저장할 때 암호화 하기  
-각 회원마다 자신만의 todo List가 있다. 로그인을 할 때 사용자 정보를 받아서 각자의 페이지를 보여주기
+@org.springframework.stereotype.Controller 이거 왜 축약이 안될까... 해결 : 클래스 이름이 Controller 이면 안된다.  
+각 회원마다 자신만의 todo List가 있다. 로그인을 할 때 사용자 정보를 받아서 각자의 페이지를 보여주기  
+로그인 후 그 멤버인지 기억하려고 계속 member.id 를 사용해서 매핑했다. 이렇게 하지 않고 뭔가 다른 방법이 있을 것 같은데.. 
