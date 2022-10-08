@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import toyproject.todoCalculator.todo.domain.Todo;
-import toyproject.todoCalculator.todo.dto.TodoDto;
 import toyproject.todoCalculator.todo.repository.TodoRepository;
 
 @RequiredArgsConstructor
@@ -14,10 +13,7 @@ public class TodoService {
     private final TodoRepository todoRepository;
 
     @Transactional
-    public void join(TodoDto todoDto) {
-
-        todoRepository.save(Todo.builder()
-                .work(todoDto.getWork())
-                .build());
+    public void join(Todo todo) {
+        todoRepository.save(todo);
     }
 }

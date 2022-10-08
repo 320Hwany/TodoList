@@ -3,22 +3,17 @@ package toyproject.todoCalculator.todo.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-import static javax.persistence.FetchType.*;
-
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 @Entity
-@Slf4j
 public class Member implements UserDetails {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,16 +28,15 @@ public class Member implements UserDetails {
 
     private String auth;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL) // 연관 관계 매핑에서의 문제
-    @JoinColumn(name = "todo_id")
-    private Todo todo;
+    @OneToMany(mappedBy = "member") // 연관 관계 매핑에서의 문제
+    private List<Todo> todos = new ArrayList<>();
 
     @Builder
-    public Member(String name, String password, String auth, Todo todo) {
+    public Member(String name, String password, String auth, List<Todo> todos) {
         this.username = name;
         this.password = password;
         this.auth = auth;
-        this.todo = todo;
+        this.todos = todos;
     }
 
     @Override

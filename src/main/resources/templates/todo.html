@@ -9,10 +9,17 @@
 <body>
 <span th:text="${member.username}"></span>
 <span>'s Todo List</span>
-    <td th:text="${member.todo.work}"></td>
+    <tbody>
+    <tr th:each="todo : ${todos}">
+        <li>
+            <td th:text="${todo.title}"></td>
+        </li>
+    </tr>
+    </tbody>
 
-    <form th:action="@{/makeTodo}">
-    <input type="text" name="work" id="work" placeholder="해야할 일을 입력하세요">
+    <form th:action="@{/makeTodo}" th:method="post">
+        <input type="text" name="username" id="username" placeholder="아이디를 입력하세요">
+        <input type="text" name="work" id="work" placeholder="해야할 일을 입력하세요">
     <button type="submit">등록</button>
     </form>
 </tr>
