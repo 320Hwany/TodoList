@@ -1,4 +1,4 @@
-package toyproject.todoCalculator.todo.controller;
+package toyproject.todolist.todo.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import toyproject.todoCalculator.todo.domain.Member;
-import toyproject.todoCalculator.todo.service.MemberService;
+import toyproject.todolist.todo.domain.Member;
+import toyproject.todolist.todo.service.MemberService;
 
 import javax.validation.Valid;
 import java.security.Principal;

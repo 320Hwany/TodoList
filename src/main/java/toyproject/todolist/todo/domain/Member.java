@@ -1,4 +1,4 @@
-package toyproject.todoCalculator.todo.domain;
+package toyproject.todolist.todo.domain;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -28,7 +28,7 @@ public class Member implements UserDetails {
 
     private String auth;
 
-    @OneToMany(mappedBy = "member") // 연관 관계 매핑에서의 문제
+    @OneToMany(mappedBy = "member")
     private List<Todo> todos = new ArrayList<>();
 
     @Builder

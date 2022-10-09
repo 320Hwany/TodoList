@@ -1,7 +1,7 @@
-package toyproject.todoCalculator.todo.repository;
+package toyproject.todolist.todo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import toyproject.todoCalculator.todo.domain.Member;
+import toyproject.todolist.todo.domain.Member;
 
 import java.util.Optional;
 

@@ -1,8 +1,8 @@
-package toyproject.todoCalculator.todo.dto;
+package toyproject.todolist.todo.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import toyproject.todoCalculator.todo.domain.Todo;
+import toyproject.todolist.todo.domain.Todo;
 
 import javax.validation.constraints.Size;
 import java.util.List;

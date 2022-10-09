@@ -1,4 +1,4 @@
-package toyproject.todoCalculator.todo.service;
+package toyproject.todolist.todo.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -6,9 +6,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import toyproject.todoCalculator.todo.domain.Member;
-import toyproject.todoCalculator.todo.dto.MemberDto;
-import toyproject.todoCalculator.todo.repository.MemberRepository;
+import toyproject.todolist.todo.domain.Member;
+import toyproject.todolist.todo.repository.MemberRepository;
 
 @RequiredArgsConstructor
 @Service

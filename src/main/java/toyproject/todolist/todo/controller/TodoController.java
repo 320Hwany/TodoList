@@ -1,14 +1,14 @@
-package toyproject.todoCalculator.todo.controller;
+package toyproject.todolist.todo.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import toyproject.todoCalculator.todo.domain.Member;
-import toyproject.todoCalculator.todo.domain.Todo;
-import toyproject.todoCalculator.todo.service.MemberService;
-import toyproject.todoCalculator.todo.service.TodoService;
+import toyproject.todolist.todo.domain.Member;
+import toyproject.todolist.todo.domain.Todo;
+import toyproject.todolist.todo.service.MemberService;
+import toyproject.todolist.todo.service.TodoService;
 
 import java.util.List;
 
@@ -28,7 +28,19 @@ public class TodoController {
         model.addAttribute("member", member);
         model.addAttribute("todos", todos);
 
-        return "todo";
+        return "makeTodo";
+    }
+
+    @GetMapping("/ShowList/{id}")
+    public String showList(@PathVariable Long id, Model model) {
+
+        Member member = memberService.findMemberById(id);
+        List<Todo> todos = member.getTodos();
+
+        model.addAttribute("member", member);
+        model.addAttribute("todos", todos);
+
+        return "showTodo";
     }
 
     @PostMapping("/makeTodo")
@@ -40,6 +52,6 @@ public class TodoController {
         todoService.join(todo);
         redirectAttributes.addAttribute("id", member.getId());
 
-        return "redirect:TodoList/{id}";
+        return "redirect:menu/{id}";
     }
 }
