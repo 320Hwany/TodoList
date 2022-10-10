@@ -44,9 +44,17 @@ localhost:8080을 로그인 창으로 설정하였다. 그러면 Getmapping("/")
 <form th:action="@{/makeTodo}" th:method="post">
 ```
 
+* @SpringBootTest 스프링 통합 테스트로 해야 memberService 가져올 수 있다. 없으면 @Autowired가 안된다.  
+또한 테스트 돌릴 때 DB에 연결안하고 테스트를 했었다. 
+
+* @GeneratedValue 로 id를 자동으로 생성해주는 것은 데이터 베이스에 연결할 때 일어난다. 테스트 코드를 작성할 때 Member 객체를 생성할 때는  
+Member에 id가 부여되지 않고 null이다. memberService.join()을 할 때 id가 부여되는 것이다. 또한 join을 해도 member.getId()는 null인데   
+Builder로 join을 할 때 auth도 넣어주어서 서로 다른 객체이다! 
 
 ## 앞으로 처리해야할 문제들  
 
-@org.springframework.stereotype.Controller 이거 왜 축약이 안될까... 해결 : 클래스 이름이 Controller 이면 안된다.  
-각 회원마다 자신만의 todo List가 있다. 로그인을 할 때 사용자 정보를 받아서 각자의 페이지를 보여주기  
-로그인 후 그 멤버인지 기억하려고 계속 member.id 를 사용해서 매핑했다. 이렇게 하지 않고 뭔가 다른 방법이 있을 것 같은데.. 
+* @org.springframework.stereotype.Controller 이거 왜 축약이 안될까... 해결 : 클래스 이름이 Controller 이면 안된다.  
+* 각 회원마다 자신만의 todo List가 있다. 로그인을 할 때 사용자 정보를 받아서 각자의 페이지를 보여주기  
+* 로그인 후 그 멤버인지 기억하려고 계속 member.id 를 사용해서 매핑했다. 이렇게 하지 않고 뭔가 다른 방법이 있을 것 같은데.. 
+* Member에 Setter 넣어주는 형태는 지양해야하는데... 테스트 코드를 작성하려면 필요하다.. 
+
