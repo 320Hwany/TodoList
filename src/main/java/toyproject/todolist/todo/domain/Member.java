@@ -29,7 +29,7 @@ public class Member implements UserDetails {
     private String auth;
 
     @OneToMany(mappedBy = "member")
-    private List<Todo> todos = new ArrayList<>();
+    private List<Todo> todos;
 
     @Builder
     public Member(String name, String password, String auth, List<Todo> todos) {
