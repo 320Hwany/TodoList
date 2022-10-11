@@ -26,6 +26,7 @@ public class MemberService implements UserDetailsService {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         memberDto.setPassword(encoder.encode(memberDto.getPassword()));
+        // MemberDto 에 Setter 지웠는데 password 암호화하기 위해서는 필요한 것 같다...
 
         Member member = memberDto.toEntity();
 

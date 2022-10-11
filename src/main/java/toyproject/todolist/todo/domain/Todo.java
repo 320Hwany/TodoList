@@ -1,5 +1,6 @@
 package toyproject.todolist.todo.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 
 import static javax.persistence.FetchType.*;
 
-@Getter @Setter
+@Getter
 @Entity
 @NoArgsConstructor
 public class Todo {
@@ -23,7 +24,9 @@ public class Todo {
 
     private String title;
 
-    public Todo(String title) {
+    @Builder
+    public Todo(Member member, String title) {
+        this.member = member;
         this.title = title;
     }
 

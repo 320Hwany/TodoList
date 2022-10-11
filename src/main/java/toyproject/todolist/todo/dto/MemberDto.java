@@ -7,7 +7,7 @@ import toyproject.todolist.todo.domain.Todo;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-@Getter @Setter // @Setter 넣어주지 않아서 @ModelAttribute 가 parameter 가져올 때 인식하지 못했다..
+@Getter // @Setter 넣어주지 않아서 @ModelAttribute 가 parameter 가져올 때 인식하지 못했다..
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberDto {
 
@@ -18,13 +18,17 @@ public class MemberDto {
     @Size(min = 2, max = 12)
     private String password;
 
+    private List<Todo> todos;
+
     @Builder
     public MemberDto(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    private List<Todo> todos;
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Member toEntity() {
 
