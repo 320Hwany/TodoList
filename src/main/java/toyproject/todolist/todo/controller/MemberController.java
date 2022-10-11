@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import toyproject.todolist.todo.domain.Member;
+import toyproject.todolist.todo.dto.MemberDto;
 import toyproject.todolist.todo.service.MemberService;
 
 import javax.validation.Valid;
@@ -50,12 +51,12 @@ public class MemberController {
     }
 
     @PostMapping("/signup")  // @Size 적용하려면 @Valid 꼭 있어야 한다.
-    public String joinMember(@Valid Member member, BindingResult bindingResult) {
+    public String joinMember(@Valid MemberDto memberDto, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "redirect:/signup?error1";
         }
-        if (memberService.join(member)) {
+        if (memberService.join(memberDto)) {
             return "redirect:/login";
         } else {
             return "redirect:/signup?error2";

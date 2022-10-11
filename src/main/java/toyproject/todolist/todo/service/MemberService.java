@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import toyproject.todolist.todo.domain.Member;
+import toyproject.todolist.todo.dto.MemberDto;
 import toyproject.todolist.todo.repository.MemberRepository;
 
 @RequiredArgsConstructor
@@ -21,14 +22,16 @@ public class MemberService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(username));
     }
     @Transactional // 이거 왜 쓰징?
-    public Boolean join(Member member) {
+    public Boolean join(MemberDto memberDto) {
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        memberDto.setPassword(encoder.encode(memberDto.getPassword()));
+
+        Member member = memberDto.toEntity();
 
         if (memberRepository.findByUsername(member.getUsername()).isPresent()) {
             return false;
         }
-
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        member.setPassword(encoder.encode(member.getPassword()));
 
         memberRepository.save(Member.builder()
                 .name(member.getUsername())
