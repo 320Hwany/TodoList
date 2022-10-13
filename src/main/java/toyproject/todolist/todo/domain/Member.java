@@ -25,7 +25,7 @@ public class Member implements UserDetails {
 
     private String auth;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", orphanRemoval = true) // delete 로 member 사라지면 todos 도 사라지게 한다.
     private List<Todo> todos;
 
     @Builder

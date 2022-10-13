@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import toyproject.todolist.todo.domain.Member;
 import toyproject.todolist.todo.dto.MemberDto;
@@ -50,6 +51,13 @@ public class MemberController {
         return "menu";
     }
 
+    @GetMapping("/DeleteMember/{id}")
+    public String deleteMember(@PathVariable Long id, Model model) {
+        Member member = memberService.findMemberById(id);
+        model.addAttribute("member", member);
+        return "deleteMember";
+    }
+
     @PostMapping("/signup")  // @Size 적용하려면 @Valid 꼭 있어야 한다.
     public String joinMember(@Valid MemberDto memberDto, BindingResult bindingResult) {
 
@@ -60,6 +68,17 @@ public class MemberController {
             return "redirect:/login";
         } else {
             return "redirect:/signup?error2";
+        }
+    }
+
+    @PostMapping("/DeleteMember/{id}")
+    public String deleteMember(@PathVariable Long id, @RequestParam String username) {
+        Member member = memberService.findMemberById(id);
+        if (member.getUsername().equals(username)) {
+            memberService.delete(member);
+            return "redirect:/";
+        } else {
+            return "redirect:/deleteMember?error";
         }
     }
 }

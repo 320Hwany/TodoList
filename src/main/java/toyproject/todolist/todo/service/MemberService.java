@@ -45,6 +45,11 @@ public class MemberService implements UserDetailsService {
     }
 
     @Transactional
+    public void delete(Member member) {
+        memberRepository.deleteById(member.getId());
+    }
+
+    @Transactional
     public Member findMemberByName(String username) {
 
         Member member = memberRepository.findByUsername(username).get();
