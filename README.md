@@ -14,6 +14,11 @@ Dependencies : Spring Web, Spring Data JPA, Spring Security, Lombok, Thymeleaf, 
 ## trouble shooting
 
 * Controller 에서 @ModelAttribute를 사용하여 MemberDto의 데이터를 넣으려면 @Setter를 넣어주어야 한다...!  
+```
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+```
+기본 생성자의 accessLevel을 protected나 privated으로 올리면 매개 변수가 존재하는 생성자로 객체생성을 하기 때문에  
+@Setter없이도 get이든 post이든 받아올 수 있다.
 
 * Controller
 localhost:8080을 로그인 창으로 설정하였다. 그러면 Getmapping("/")을 해주지 않아도 알아서 index.html의 파일을 불러온다. 하지만 Postmapping("/")을 사용하니
