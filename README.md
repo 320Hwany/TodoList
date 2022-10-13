@@ -13,8 +13,7 @@ Dependencies : Spring Web, Spring Data JPA, Spring Security, Lombok, Thymeleaf, 
 
 ## trouble shooting
 
-* [MemberDto](https://github.com/yhwjd/todoCalculator/blob/master/src/main/java/toyproject/todoCalculator/todo/dto/MemberDto.java)  
-Controller 에서 @ModelAttribute를 사용하여 MemberDto의 데이터를 넣으려면 @Setter를 넣어주어야 한다...!  
+* Controller 에서 @ModelAttribute를 사용하여 MemberDto의 데이터를 넣으려면 @Setter를 넣어주어야 한다...!  
 
 * Controller
 localhost:8080을 로그인 창으로 설정하였다. 그러면 Getmapping("/")을 해주지 않아도 알아서 index.html의 파일을 불러온다. 하지만 Postmapping("/")을 사용하니
@@ -51,10 +50,17 @@ localhost:8080을 로그인 창으로 설정하였다. 그러면 Getmapping("/")
 Member에 id가 부여되지 않고 null이다. memberService.join()을 할 때 id가 부여되는 것이다. 또한 join을 해도 member.getId()는 null인데   
 Builder로 join을 할 때 auth도 넣어주어서 서로 다른 객체이다! 
 
+* member를 삭제할 때 todos도 같이 삭제가 되어야 한다. 
+
+```
+@OneToMany(mappedBy = "member", orphanRemoval = true)
+ ```
+
 ## 앞으로 처리해야할 문제들  
 
 * @org.springframework.stereotype.Controller 이거 왜 축약이 안될까... 해결 : 클래스 이름이 Controller 이면 안된다.  
 * 각 회원마다 자신만의 todo List가 있다. 로그인을 할 때 사용자 정보를 받아서 각자의 페이지를 보여주기  
 * 로그인 후 그 멤버인지 기억하려고 계속 member.id 를 사용해서 매핑했다. 이렇게 하지 않고 뭔가 다른 방법이 있을 것 같은데.. 
 * Member에 Setter 넣어주는 형태는 지양해야하는데... 테스트 코드를 작성하려면 필요하다.. 
+* 비밀번호가 암호화 되어 DB에 저장되어 있다. 나중에 로그인하고 DB에 있는 비밀번호와 일치하는지 어떻게 확인할까..
 
