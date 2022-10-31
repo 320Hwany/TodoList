@@ -1,6 +1,7 @@
 package toyproject.todolist.todo.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,12 +13,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import toyproject.todolist.todo.domain.Member;
 import toyproject.todolist.todo.dto.MemberDto;
 import toyproject.todolist.todo.service.MemberService;
+import toyproject.todolist.todo.service.TodoService;
 
 import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller // 축약 하는법! 클래스 이름이 Controller 이면 안된다!
 @RequiredArgsConstructor
+@Slf4j
 public class MemberController {
 
     private final MemberService memberService;
@@ -58,6 +61,13 @@ public class MemberController {
         return "deleteMember";
     }
 
+    @GetMapping("/UpdateMember/{id}")
+    public String updateMember(@PathVariable Long id, Model model) {
+        Member member = memberService.findMemberById(id);
+        model.addAttribute("member", member);
+        return "updateMember";
+    }
+
     @PostMapping("/signup")  // @Size 적용하려면 @Valid 꼭 있어야 한다.
     public String joinMember(@Valid MemberDto memberDto, BindingResult bindingResult) {
 
@@ -79,6 +89,18 @@ public class MemberController {
             return "redirect:/";
         } else {
             return "redirect:/deleteMember?error";
+        }
+    }
+
+    @PostMapping("/UpdateMember/{id}")
+    public String updateMember(@PathVariable Long id, @RequestParam String beforeUsername,
+                               @RequestParam String afterUsername) {
+        Member member = memberService.findMemberById(id);
+        if (member.getUsername().equals(beforeUsername)) {
+            member.setUsername(afterUsername);  // DB 에서는 바뀌지 않는다..
+            return "redirect:/";
+        } else {
+            return "redirect:/updateMember?error";
         }
     }
 }
